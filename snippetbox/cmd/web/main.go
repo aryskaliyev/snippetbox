@@ -3,10 +3,14 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
+	"fmt"
 )
 
 
 func main() {
+	pwd, _ := os.Getwd()
+	fmt.Println(pwd)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/snippet", showSnippet)
