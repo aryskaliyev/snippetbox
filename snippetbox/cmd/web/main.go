@@ -6,6 +6,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"lincoln.boris/snippetbox/pkg/models/mysql"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -13,13 +16,12 @@ import (
 type application struct {
 	errorLog *log.Logger
 	infoLog *log.Logger
+	snippets *mysql.SnippetModel
 }
 
 func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
-
 	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL database connection")
-
 	flag.Parse()
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -35,6 +37,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog: infoLog,
+		snippets: &mysql.SnippetModel{DB: db},
 	}
 
 	srv := &http.Server{
