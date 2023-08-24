@@ -1,0 +1,15 @@
+// MySQL Server Container
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=pass -e MYSQL_DATABASE=db -d -p 3306:3306 mysql:latest
+
+// To get MySQL Server Container IP address
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql-container
+
+// MySQL Client Container for <root> user
+#docker run --name <mysql-client-container-root> --link mysql-container:mysql -it mysql:latest mysql -h mysql -u <root> -p
+
+docker run --name mysql-client-container-root --link mysql-container:mysql -it mysql:latest mysql -h mysql -u root -p
+
+// MySQL Client Container for <web> user
+#docker run --name <mysql-client-container-web> --link mysql-container:mysql -it mysql:latest mysql -h <172.17.0.2> -D snippetbox -u web -p
+
+docker run --name mysql-client-container-web --link mysql-container:mysql -it mysql:latest mysql -h 172.17.0.2 -D snippetbox -u web -p
