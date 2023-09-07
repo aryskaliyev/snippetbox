@@ -1,5 +1,10 @@
-CREATE DATABASE snippetbox CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE test_snippetbox CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+CREATE USER 'test_web'@'%';
+GRANT CREATE, DROP, ALTER, INDEX, SELECT, INSERT, UPDATE, DELETE ON testsnippetbox.* TO 'test_web'@'%';
+ALTER USER 'test_web'@'%' IDENTIFIED BY 'pass';
+
+CREATE DATABASE snippetbox CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE snippetbox;
 
 CREATE TABLE snippets (
@@ -46,3 +51,4 @@ ALTER TABLE users ADD CONSTRAINT users_uc_email UNIQUE (email);
 CREATE USER 'web'@'%';
 GRANT SELECT, INSERT ON snippetbox.* TO 'web'@'%';
 ALTER USER 'web'@'%' IDENTIFIED BY 'pass';
+
