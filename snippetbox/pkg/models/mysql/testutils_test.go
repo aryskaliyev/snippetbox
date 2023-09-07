@@ -12,6 +12,11 @@ func newTestDB(t *testing.T) (*sql.DB, func()) {
 		t.Fatal(err)
 	}
 
+	script, err := ioutil.ReadFile("./testdata/setup.sql")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	_, err = db.Exec(string(script))
 	if err != nil {
 		t.Fatal(err)
