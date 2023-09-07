@@ -83,7 +83,7 @@ func (ts *testServer) get(t *testing.T, urlPath string) (int, http.Header, []byt
 	return rs.StatusCode, rs.Header, body
 }
 
-func (ts *testServer) postForm(t *testing.T, urlPath string, form url.Values) (int, string, []byte) {
+func (ts *testServer) postForm(t *testing.T, urlPath string, form url.Values) (int, http.Header, []byte) {
 	rs, err := ts.Client().PostForm(ts.URL + urlPath, form)
 	if err != nil {
 		t.Fatal(err)
