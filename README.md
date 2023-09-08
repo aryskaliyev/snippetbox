@@ -1,2 +1,2 @@
-# letsgo
-Codebase is from Alex Edwards' book - Let's Go
+# Snippetbox Project
+Codebase is taken from Alex Edwards' book - Let's Go
